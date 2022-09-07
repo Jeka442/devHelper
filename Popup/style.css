@@ -1,0 +1,96 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  min-width: 400px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+input{
+  border-radius:6px;
+  padding-block:5px;
+  border:thin solid#61bbce;
+  padding-inline:2px;
+}
+input:focus{
+  outline: none !important;
+  border:thin solid#478996;
+}
+
+button {
+  cursor: pointer;
+  min-width: 100px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  border-radius: 6px;
+  border: 0;
+  background-color: #61bbce;
+
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: #478996;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #478996;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+header > h1 {
+  translate: -10px 5px;
+  color: #fff;
+}
+header span {
+  color: red;
+}
+header > img {
+  width: 65px;
+}
+
+.Section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.Section > h2 {
+  font-size: 25px;
+}
+.Section section {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.flexRow {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}

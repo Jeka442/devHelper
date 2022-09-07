@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <img src="/img/dev.png" alt="">
+      <h1><span><</span> devHelper <span>/></span></h1>
+    </header>
+    
+    <div class="Section">
+      <h2>Add to storage</h2>
+      <div class="flexRow">
+        <div class="flexColumn">
+          <label>key</label>
+          <input type="text" id="AddStuffInpKey" />
+        </div>
+        <div class="flexColumn">
+          <label>value</label>
+          <input type="text" id="AddStuffInpValue" />
+        </div>
+      </div>
+
+      <div class="flexRow">
+        <button id="addToSession">Session</button>
+        <button id="addToLocal">Local</button>
+      </div>
+    </div>
+    <div class="Section">
+      <h2>Delete operation</h2>
+      <section>
+        <button id="delSessionStorage" type="button">SessionStorage</button>
+        <button id="delLocalStorage" type="button">LocalStorage</button>
+        <button id="delCookies">Cookies</button>
+      </section>
+    </div>
+    <div class="Section">
+      <h2>Tab operation</h2>
+      <section>
+        <button id="HardReset">Hard Reset</button>
+        <button id="InNewTab">New Tab</button>
+      </section>
+    </div>
+    <script src="global.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

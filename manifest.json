@@ -1,0 +1,25 @@
+{
+  "name": "devHelper",
+  "description": "help you in dev",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "action": {
+    "default_popup": "Popup/popup.html"
+  },
+  "default_icon": {
+    "16": "img/dev.png",
+    "32": "img/dev.png",
+    "48": "img/dev.png",
+    "128": "img/dev.png"
+  },
+  "icons": {
+    "16": "img/dev.png",
+    "32": "img/dev.png",
+    "48": "img/dev.png",
+    "128": "img/dev.png"
+  }
+}
