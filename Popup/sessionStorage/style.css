@@ -1,0 +1,52 @@
+    .flexRow {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+  }
+  .flexColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  #count{
+    color:red;
+  }
+
+  .delBtn{
+    border: thin solid #478996;
+    padding-block: 2px;
+    padding-inline: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .delBtn:hover{
+    background-color: #57a5b4;
+  }
+
+  #refresh{
+    margin-left: 20px;
+    cursor: pointer;
+  }
+
+  #counterDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:15px;
+    right: 20px;
+    font-size: 20px;
+    gap: 10px;
+    font-weight: bold;
+  }
+
+
+  #counterDiv img{
+    height: 25px;
+    margin: 0;
+  }
