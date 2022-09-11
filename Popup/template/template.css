@@ -74,6 +74,10 @@
     padding-block: 6px;
   }
 
+  menu div:nth-last-child(1){
+    margin-top: auto;
+  }
+
   menu div:hover, menu div.active:hover{
     background-color: #478996
   }

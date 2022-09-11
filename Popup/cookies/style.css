@@ -5,6 +5,11 @@
   overflow: hidden;
 }
 
+
+h2{
+  margin-bottom: 20px;
+}
+
 .cookie-name{
   text-align: left;
   background-color: #47899671;
@@ -46,4 +51,31 @@ input, textarea{
   display: flex;
   flex-direction: column;
   gap:5px;
+}
+
+
+#refresh{
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+#counterDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top:15px;
+  right: 20px;
+  font-size: 20px;
+  gap: 10px;
+  font-weight: bold;
+}
+
+
+#counterDiv img{
+  height: 25px;
+  margin: 0;
+}
+#count{
+  color:red;
 }

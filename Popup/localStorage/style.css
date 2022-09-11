@@ -12,9 +12,7 @@
   align-items: center;
 }
 
-#count{
-  color:red;
-}
+
 
 .delBtn{
   border: thin solid #478996;
@@ -49,4 +47,7 @@
 #counterDiv img{
   height: 25px;
   margin: 0;
+}
+#count{
+  color:red;
 }

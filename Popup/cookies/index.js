@@ -1,6 +1,7 @@
 
 const container = document.getElementById("container");
-
+const counter = document.getElementById("count");
+const refreshBtn = document.getElementById("refresh");
 const getDate = (val) => {
     if (!val) return "";
     console.log(val.toFixed(0));
@@ -8,12 +9,20 @@ const getDate = (val) => {
     return date.toISOString();
 }
 
+refreshBtn.addEventListener("click", () => {
+    location.href = location.href;
+})
+
 const initFunc = async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     try {
         let url = new URL(tab.url);
         const cookies = await chrome.cookies.getAll({ domain: url.hostname });
         let index = 0;
+        container.innerHTML = "";
+        if (!cookies.length) {
+            container.innerHTML = `<h2 style="margin-top:50px;">No Cookies</h2><span>NOTE: More cookies can be stored from different domains</span>`
+        }
         for (let cookie of cookies) {
             let elm = document.createElement("div");
             elm.id = `container-${index}`;
@@ -45,6 +54,7 @@ const initFunc = async () => {
             `
             container.appendChild(elm);
             index++;
+            counter.innerText = index;
         }
 
         for (let i = 0; i < cookies.length; i++) {
@@ -78,6 +88,7 @@ const initFunc = async () => {
                     name: name,
                     storeId: storeId,
                 }).then(() => {
+                    counter.innerText = parseInt(counter.innerText) - 1;
                     elm.remove();
                 }).catch((e) => {
                     console.log("something went wrong on deleting cookie", e)

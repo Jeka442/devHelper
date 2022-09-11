@@ -21,6 +21,9 @@ const menuHtml = `
 <div id="automation">
     <a href="../automation/index.html"><img src="../../img/automation.png" alt="" /> </a>
 </div>
+<div id="aboutMe">
+    <a href="../aboutMe/index.html"><img src="../../img/aboutMe.png" alt="" /> </a>
+</div>
 `
 const header = document.getElementsByTagName("header")[0];
 const menu = document.getElementsByTagName("menu")[0];
