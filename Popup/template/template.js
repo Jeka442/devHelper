@@ -18,8 +18,8 @@ const menuHtml = `
 <div id="cookies">
     <a href="../cookies/index.html"><img src="../../img/cookie.png" alt="" /> </a>
 </div>
-<div id="settings">
-    <a href="../settings/index.html"><img src="../../img/settings.png" alt="" /> </a>
+<div id="automation">
+    <a href="../automation/index.html"><img src="../../img/automation.png" alt="" /> </a>
 </div>
 `
 const header = document.getElementsByTagName("header")[0];

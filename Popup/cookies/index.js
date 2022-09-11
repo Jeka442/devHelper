@@ -6,7 +6,7 @@ const getDate = (val) => {
     console.log(val.toFixed(0));
     const date = new Date(val * 1000);
     return date.toISOString();
-}//2023-03-12T21:37:10.990Z
+}
 
 const initFunc = async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -86,13 +86,9 @@ const initFunc = async () => {
         }
 
     } catch (e) {
-
         console.log("failed on loading cookies", e);
     }
 }
-
-
-
 
 
 initFunc();
