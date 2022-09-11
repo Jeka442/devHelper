@@ -134,7 +134,9 @@
   /* Track */
   ::-webkit-scrollbar-track {
     background: #4789962e; 
-    margin-block:20px;
+    margin-block:5px;
+    border-radius:10px;
+
   }
    
   /* Handle */
