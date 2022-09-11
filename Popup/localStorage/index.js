@@ -4,8 +4,6 @@ const container = document.getElementById("container");
 const counter = document.getElementById("count");
 const refreshBtn = document.getElementById("refresh");
 
-
-
 async function getStorage() {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -24,12 +22,15 @@ async function getStorage() {
         let index = 0;
         for (let [key, val] of content) {
             let elm = document.createElement("div");
+            let isLongString = val.length > 20000;
+            let inputStyle = isLongString ? `style="border:1px solid red; color:red"` : "";
+            let inputValue = isLongString ? '*OVER 20k CHARS*' : val;
             elm.classList.add("item");
             elm.classList.add("flexRow");
             elm.innerHTML = `
             <div>
               <input class="keyInp" value="${key}" type="text" for-index="${index}"/>
-              <input class="valInp" value="${val}" type="text" for-index="${index}"/>
+              <input ${inputStyle} class="valInp" value="${inputValue}" type="text" for-index="${index}"/>
             </div>
             <div class="delBtn" for-index="${index}">delete</div>
         `;
