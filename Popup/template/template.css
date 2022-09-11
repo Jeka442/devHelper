@@ -16,6 +16,15 @@
     border:thin solid#61bbce;
     padding-inline:2px;
   }
+
+  textarea{
+    border-radius:6px;
+    padding-block:5px;
+    border:thin solid#61bbce;
+    padding-inline:2px;
+    resize: none;
+  }
+
   input:focus{
     outline: none !important;
     border:thin solid#478996;
@@ -42,6 +51,10 @@
     text-align: center;
     padding: 15px;
     position: relative;
+    width: 480px;
+    max-width: 480px;
+    overflow-x: hidden;
+    box-sizing: border-box;
     max-height:100%;
     overflow-y:auto;
   }
@@ -110,4 +123,27 @@
   
   .w-full{
     width:100%;
+  }
+
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #4789962e; 
+    margin-block:20px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4789968a; 
+    border-radius:10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #478996; 
   }
