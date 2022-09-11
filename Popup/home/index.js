@@ -21,7 +21,6 @@ AddStuffInpValue.addEventListener("blur", (e) => {
   chrome.storage.sync.set({ value: value });
 });
 
-
 injectClick(addToSession, () => {
   console.log("devHelper - write to sessionStorage");
   chrome.storage.sync.get("key").then(({ key }) => {
@@ -50,16 +49,24 @@ injectClick(delLocalStorage, () => {
   window.localStorage.clear();
 });
 
-injectClick(delCookies, () => {
-  console.log("devHelper - delete cookies");
-  var cookies = document.cookie.split(";");
-  for (var i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i];
-    var eqPos = cookie.indexOf("=");
-    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+delCookies.addEventListener("click", async () => {
+  console.log("devHelper - clears cookies");
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  let url = new URL(tab.url);
+  try {
+    const cookies = await chrome.cookies.getAll({ domain: url.hostname });
+    cookies.map((cookie) => {
+      const protocol = cookie.secure ? "https:" : "http:";
+      const cookieUrl = `${protocol}//${cookie.domain}${cookie.path}`;
+      chrome.cookies.remove({
+        url: cookieUrl,
+        name: cookie.name,
+        storeId: cookie.storeId,
+      });
+    });
+  } catch (e) {
+    console.log("something went wrong on deleting cookies", e);
   }
-  window.document.cookie = "";
 });
 
 HardReset.addEventListener("click", () => {
@@ -69,7 +76,6 @@ HardReset.addEventListener("click", () => {
     chrome.tabs.create({ url: url });
   });
 });
-
 
 InNewTab.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
