@@ -22,9 +22,9 @@ async function getStorage() {
         let index = 0;
         for (let [key, val] of content) {
             let elm = document.createElement("div");
-            let isLongString = val.length > 20000;
+            let isLongString = val.length > 8000;
             let inputStyle = isLongString ? `style="border:1px solid red; color:red"` : "";
-            let inputValue = isLongString ? '*OVER 20k CHARS*' : val;
+            let inputValue = isLongString ? '*OVER 8k CHARS*' : val;
             elm.classList.add("item");
             elm.classList.add("flexRow");
             elm.innerHTML = `
@@ -57,7 +57,7 @@ async function attachListeners(tab) {
                     localStorage.setItem(key, val);
                 },
             }).then(() => {
-                console.log("value updated");
+                Logger("value updated");
             });
         })
         delBtn.addEventListener("click", () => {
@@ -68,7 +68,7 @@ async function attachListeners(tab) {
                     localStorage.removeItem(key);
                 },
             }).then(() => {
-                console.log("delete value");
+                Logger("delete value");
             });
             counter.innerText = parseInt(counter.innerText) - 1;
             elm.style.display = "none";

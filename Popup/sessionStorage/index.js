@@ -26,6 +26,7 @@ async function getStorage() {
             let elm = document.createElement("div");
             elm.classList.add("item");
             elm.classList.add("flexRow");
+            let isLongString = val.length > 20000;
             let inputStyle = isLongString ? `style="border:1px solid red; color:red"` : "";
             let inputValue = isLongString ? '*OVER 20k CHARS*' : val;
             elm.innerHTML = `
@@ -58,7 +59,7 @@ async function attachListeners(tab) {
                     sessionStorage.setItem(key, val);
                 },
             }).then(() => {
-                console.log("value updated");
+                Logger("value updated");
             });
         })
         delBtn.addEventListener("click", () => {
@@ -69,7 +70,7 @@ async function attachListeners(tab) {
                     sessionStorage.removeItem(key);
                 },
             }).then(() => {
-                console.log("delete value");
+                Logger("delete value");
             });
             counter.innerText = parseInt(counter.innerText) - 1;
             elm.style.display = "none";

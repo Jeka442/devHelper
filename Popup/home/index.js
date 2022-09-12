@@ -21,33 +21,82 @@ AddStuffInpValue.addEventListener("blur", (e) => {
   chrome.storage.sync.set({ value: value });
 });
 
-injectClick(addToSession, () => {
-  console.log("devHelper - write to sessionStorage");
-  chrome.storage.sync.get("key").then(({ key }) => {
-    chrome.storage.sync.get("value").then(({ value }) => {
-      window.sessionStorage.setItem(key, value);
+
+//sessionStorage add
+addToSession.addEventListener("click",async ()=>{
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting
+    .executeScript({
+      target: { tabId: tab.id },
+      args: [{key:AddStuffInpKey.value ,val:AddStuffInpValue.value}],
+      func: ({key,val})=>{
+        console.log(key,val);
+        window.sessionStorage.setItem(key, val);
+      },
+    })
+    .then(() => {
+      Logger("Added to sessionStorage");
+    })
+    .catch(() => {
+      Logger("Failed to add to sessionStorage");
     });
-  });
-});
+})
 
-injectClick(addToLocal, () => {
-  console.log("devHelper - write to localStorage");
-  chrome.storage.sync.get("key").then(({ key }) => {
-    chrome.storage.sync.get("value").then(({ value }) => {
-      window.localStorage.setItem(key, value);
+//localStorage add
+addToLocal.addEventListener("click",async ()=>{
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting
+    .executeScript({
+      target: { tabId: tab.id },
+      args: [{key:AddStuffInpKey.value ,val:AddStuffInpValue.value}],
+      func: ({key,val})=>{
+        window.localStorage.setItem(key, val);
+      },
+    })
+    .then(() => {
+      Logger("Added to localStorage");
+    })
+    .catch(() => {
+      Logger("Failed to add to localStorage");
     });
-  });
-});
+})
 
-injectClick(delSessionStorage, () => {
-  console.log("devHelper - clears window.sessionStorage");
-  window.sessionStorage.clear();
-});
+//clear sessionStorage
+delSessionStorage.addEventListener("click",async ()=>{
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting
+    .executeScript({
+      target: { tabId: tab.id },
+      func: ()=>{
+        window.sessionStorage.clear();
+      },
+    })
+    .then(() => {
+      Logger("sessionStorage cleared");
+    })
+    .catch(() => {
+      Logger("Failed to clear sessionStorage");
+    });
+})
 
-injectClick(delLocalStorage, () => {
-  console.log("devHelper - clears window.localStorage");
-  window.localStorage.clear();
-});
+//clear localStorage
+delLocalStorage.addEventListener("click",async ()=>{
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting
+    .executeScript({
+      target: { tabId: tab.id },
+      func: ()=>{
+        window.localStorage.clear();
+      },
+    })
+    .then(() => {
+      Logger("localStorage cleared");
+    })
+    .catch(() => {
+      Logger("Failed to clear localStorage");
+    });
+})
+
 
 delCookies.addEventListener("click", async () => {
   console.log("devHelper - clears cookies");
@@ -64,8 +113,10 @@ delCookies.addEventListener("click", async () => {
         storeId: cookie.storeId,
       });
     });
+    Logger("cleared cookies")
   } catch (e) {
     console.log("something went wrong on deleting cookies", e);
+    Logger("something went wrong on deleting cookies");
   }
 });
 

@@ -89,6 +89,7 @@ const initFunc = async () => {
                     storeId: storeId,
                 }).then(() => {
                     counter.innerText = parseInt(counter.innerText) - 1;
+                    Logger("cookie has bean deleted")
                     elm.remove();
                 }).catch((e) => {
                     console.log("something went wrong on deleting cookie", e)
