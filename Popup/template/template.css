@@ -155,8 +155,8 @@
   #notification{
     position:fixed;
     bottom:0;
-    right: 0;
-    width: calc(100% - 55px);
+    left: 45px;
+    width: 100%;
     border-radius: 0;
     border: 0px;
     background-color: rgba(0, 0, 0, 0.1);

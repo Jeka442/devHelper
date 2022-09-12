@@ -23,14 +23,14 @@ AddStuffInpValue.addEventListener("blur", (e) => {
 
 
 //sessionStorage add
-addToSession.addEventListener("click",async ()=>{
+addToSession.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting
     .executeScript({
       target: { tabId: tab.id },
-      args: [{key:AddStuffInpKey.value ,val:AddStuffInpValue.value}],
-      func: ({key,val})=>{
-        console.log(key,val);
+      args: [{ key: AddStuffInpKey.value, val: AddStuffInpValue.value }],
+      func: ({ key, val }) => {
+        console.log(key, val);
         window.sessionStorage.setItem(key, val);
       },
     })
@@ -43,13 +43,13 @@ addToSession.addEventListener("click",async ()=>{
 })
 
 //localStorage add
-addToLocal.addEventListener("click",async ()=>{
+addToLocal.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting
     .executeScript({
       target: { tabId: tab.id },
-      args: [{key:AddStuffInpKey.value ,val:AddStuffInpValue.value}],
-      func: ({key,val})=>{
+      args: [{ key: AddStuffInpKey.value, val: AddStuffInpValue.value }],
+      func: ({ key, val }) => {
         window.localStorage.setItem(key, val);
       },
     })
@@ -62,12 +62,12 @@ addToLocal.addEventListener("click",async ()=>{
 })
 
 //clear sessionStorage
-delSessionStorage.addEventListener("click",async ()=>{
+delSessionStorage.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting
     .executeScript({
       target: { tabId: tab.id },
-      func: ()=>{
+      func: () => {
         window.sessionStorage.clear();
       },
     })
@@ -80,12 +80,12 @@ delSessionStorage.addEventListener("click",async ()=>{
 })
 
 //clear localStorage
-delLocalStorage.addEventListener("click",async ()=>{
+delLocalStorage.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting
     .executeScript({
       target: { tabId: tab.id },
-      func: ()=>{
+      func: () => {
         window.localStorage.clear();
       },
     })
@@ -120,11 +120,16 @@ delCookies.addEventListener("click", async () => {
   }
 });
 
-HardReset.addEventListener("click", () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    let url = tabs[0].url;
-    chrome.tabs.remove(tabs[0].id);
-    chrome.tabs.create({ url: url });
+HardReset.addEventListener("click", async () => {
+  Logger("Hard reset");
+  chrome.tabs.query({ active: true, currentWindow: true }, async function (tabs) {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => {
+        window.location.reload(true);
+      }
+    })
   });
 });
 

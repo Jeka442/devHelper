@@ -38,19 +38,19 @@ notification.classList.add("notification-hide");
 document.body.appendChild(notification);
 
 document.getElementById("notification").addEventListener("click", (input) => {
-  let val = input.target.value;
-  if (val == "") {
-    input.target.classList.remove("notification-show");
-    input.target.classList.add("notification-hide");
-  } else {
-    input.target.classList.remove("notification-hide");
-    input.target.classList.add("notification-show");
-  }
+    let val = input.target.value;
+    if (val == "") {
+        input.target.classList.remove("notification-show");
+        input.target.classList.add("notification-hide");
+    } else {
+        input.target.classList.remove("notification-hide");
+        input.target.classList.add("notification-show");
+    }
 });
 
 var task;
-var Logger = (val)=>{
-    if(task) clearTimeout(task);
+var Logger = (val) => {
+    if (task) clearTimeout(task);
     const input = document.getElementById("notification");
     input.value = val;
     input.click();
