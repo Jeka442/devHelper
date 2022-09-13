@@ -1,6 +1,7 @@
 const addBtn = document.getElementById("addBtn");
 const container = document.getElementById("container");
 const startBtn = document.getElementById("activateBtn");
+const saveBtn = document.getElementById("saveBtn");
 
 function onSelect(e) {
     let selectValue = e.target.value;
@@ -39,8 +40,7 @@ function deleteRow(e) {
     })
 }
 
-
-function addAutomation(index) {
+function addAutomation(index, action) {
     let div = document.createElement("div");
     div.classList.add("operation-content");
     div.setAttribute("for-index", index);
@@ -68,6 +68,15 @@ function addAutomation(index) {
     div.appendChild(inp1);
     div.appendChild(inp2);
     div.appendChild(delBtn);
+
+    if (action) {
+        if (action.inp2 != "") {
+            inp2.disabled = false;
+        }
+        select.value = action.action;
+        inp1.value = action.inp1;
+        inp2.value = action.inp2;
+    }
     container.appendChild(div);
 
 }
@@ -90,6 +99,7 @@ const getActionObject = () => {
 }
 
 const startActions = async (track) => {
+    Logger("Automation start")
     for (let member of track) {
         const { action, inp1, inp2 } = member;
         switch (action) {
@@ -107,8 +117,8 @@ const startActions = async (track) => {
                 break;
         }
     }
+    Logger("Automation finish")
 }
-
 
 
 startBtn.addEventListener("click", () => {
@@ -186,3 +196,30 @@ const setValFromAction = async (selectorA, selectorB) => {
         }
     })
 }
+
+
+saveBtn.addEventListener("click", async () => {
+    const actions = getActionObject();
+    if (!actions || actions.length == 0) {
+        chrome.storage.local.remove("automation", () => {
+            Logger("Automation cleared")
+        });
+    } else {
+        chrome.storage.local.set({ automation: actions }, () => {
+            Logger("Automation saved")
+        })
+    }
+})
+
+function initFromStorage() {
+    chrome.storage.local.get(["automation"], (data) => {
+        if (data && data.automation && data.automation.length > 0) {
+            let index = 0;
+            for (let action of data.automation) {
+                addAutomation(index, action);
+                index++;
+            }
+        }
+    });
+}
+initFromStorage();
