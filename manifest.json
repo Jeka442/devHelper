@@ -1,7 +1,7 @@
 {
   "name": "devHelper",
   "description": "provides useful dev tool shortcuts",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "manifest_version": 3,
   "host_permissions": ["<all_urls>"],
   "permissions": ["storage", "activeTab", "scripting", "tabs", "cookies"],

@@ -1,17 +1,9 @@
 
-#content{
+p{
   white-space: pre-wrap;
   width: 400px;
   margin: auto;
   margin-top: 50px;
-}
-
-#footer{
-  position: absolute;
-  white-space: pre-wrap;
-  bottom:10px;
-  left: 50%;
-  translate: -50%;
-  width: 400px;
-  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
 }
