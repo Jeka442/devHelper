@@ -20,7 +20,15 @@ async function getStorage() {
             container.innerHTML = "";
         } else {
             container.innerHTML = `<h2>Session storage is empty</h2>`
+            return;
         }
+        const headers = document.createElement('div');
+        headers.classList.add('headers');
+        headers.innerHTML = `
+            <span>key</span>
+            <span>value</span>
+        `;
+        container.appendChild(headers);
         let index = 0;
         for (let [key, val] of content) {
             let elm = document.createElement("div");
@@ -36,13 +44,6 @@ async function getStorage() {
             </div>
             <div class="delBtn" for-index="${index}">delete</div>
         `;
-            const headers = document.createElement('div');
-            headers.classList.add('headers');
-            headers.innerHTML = `
-                <span>key</span>
-                <span>value</span>
-            `;
-            container.appendChild(headers);
             container.appendChild(elm);
             index++;
         }
