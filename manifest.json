@@ -1,6 +1,6 @@
 {
   "name": "devHelper",
-  "description": "help you in dev",
+  "description": "provides useful dev tool shortcuts",
   "version": "1.0",
   "manifest_version": 3,
   "host_permissions": ["<all_urls>"],
