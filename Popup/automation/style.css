@@ -1,35 +1,49 @@
 
-  .Section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding-inline: 20px;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .Section > h2 {
-    font-size: 25px;
-  }
-  .Section section {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .flexRow {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
-  }
-  .flexColumn {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
-  }
-  
+#automation-head{
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#container{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.operation-content{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.operation-content input, .operation-content select{
+  min-width: 20px;
+  width:100px;
+}
+.operation-content > button{
+  padding: 3px;
+  font-size: 12px;
+  min-width: 20px;
+}
+
+#operations{
+  margin-top: 20px;
+  display: flex;
+  gap:20px;
+  justify-content: flex-end;
+}
+
+#activateBtn{
+  background-color: #E15B64;
+}
+
+#activateBtn:hover{
+  background-color: #dd3641;
+}
+
+.inp:disabled{
+  background-color: transparent;
+  border: transparent;
+}

@@ -29,6 +29,18 @@
     outline: none !important;
     border:thin solid#478996;
   }
+
+  select{
+    border-radius:6px;
+    padding-block:5px;
+    border:thin solid#61bbce;
+    padding-inline:2px;
+  }
+  select:focus{
+    outline: none !important;
+    border:thin solid#478996;
+  }
+  
   
   button {
     cursor: pointer;

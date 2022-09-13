@@ -31,7 +31,6 @@ document.getElementById(window.location.pathname.split("/")[2]).classList.add("a
 
 
 
-
 const notification = document.createElement("input");
 notification.id = "notification";
 notification.classList.add("notification-hide");
