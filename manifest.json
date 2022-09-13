@@ -9,7 +9,7 @@
   "host_permissions": ["<all_urls>"],
   "permissions": ["storage", "activeTab", "scripting", "tabs", "cookies"],
   "action": {
-    "default_popup": "Popup/home/index.html"
+    "default_popup": "Popup/popup.html"
   },
   "default_icon": {
     "16": "img/dev.png",

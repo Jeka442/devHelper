@@ -1,35 +1,17 @@
 
-  .Section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding-inline: 20px;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .Section > h2 {
-    font-size: 25px;
-  }
-  .Section section {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .flexRow {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
-  }
-  .flexColumn {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
-  }
-  
+#content{
+  white-space: pre-wrap;
+  width: 400px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+#footer{
+  position: absolute;
+  white-space: pre-wrap;
+  bottom:10px;
+  left: 50%;
+  translate: -50%;
+  width: 400px;
+  cursor: pointer;
+}
