@@ -8,12 +8,6 @@
   "action": {
     "default_popup": "Popup/popup.html"
   },
-  "default_icon": {
-    "16": "img/dev.png",
-    "32": "img/dev.png",
-    "48": "img/dev.png",
-    "128": "img/dev.png"
-  },
   "icons": {
     "16": "img/dev.png",
     "32": "img/dev.png",

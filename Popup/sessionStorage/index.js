@@ -36,6 +36,13 @@ async function getStorage() {
             </div>
             <div class="delBtn" for-index="${index}">delete</div>
         `;
+            const headers = document.createElement('div');
+            headers.classList.add('headers');
+            headers.innerHTML = `
+                <span>key</span>
+                <span>value</span>
+            `;
+            container.appendChild(headers);
             container.appendChild(elm);
             index++;
         }

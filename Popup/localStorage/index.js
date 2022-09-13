@@ -20,6 +20,13 @@ async function getStorage() {
             container.innerHTML = `<h2>Local storage is empty</h2>`
         }
         let index = 0;
+        const headers = document.createElement('div');
+        headers.classList.add('headers');
+        headers.innerHTML = `
+            <span>key</span>
+            <span>value</span>
+        `;
+        container.appendChild(headers);
         for (let [key, val] of content) {
             let elm = document.createElement("div");
             let isLongString = val.length > 8000;
