@@ -18,6 +18,7 @@ async function getStorage() {
             container.innerHTML = "";
         } else {
             container.innerHTML = `<h2>Local storage is empty</h2>`
+            return;
         }
         let index = 0;
         const headers = document.createElement('div');
