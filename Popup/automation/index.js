@@ -152,6 +152,7 @@ const clickAction = async (selector) => {
 };
 
 
+
 const setValAction = async (selector, value) => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     await chrome.scripting.executeScript({
@@ -162,9 +163,9 @@ const setValAction = async (selector, value) => {
             if (!elm) return null; // write error to log
             let tagName = elm.tagName.toLowerCase();
             if (tagName == "input" || tagName == "textarea" || tagName == "select") {
+                let changeEvent = new Event("change", { bubbles: true, cancelable: true, composed: true });
                 elm.setAttribute("value", props.value);
                 elm.innerText = props.value;
-                let changeEvent = new Event("change", { bubbles: true, cancelable: true, composed: true });
                 elm.dispatchEvent(changeEvent);
             } else {
                 elm.innerText = props.value;
@@ -210,7 +211,10 @@ const setValFromAction = async (selectorA, selectorB) => {
                 tagNameB == "textarea" ||
                 tagNameB == "select"
             ) {
-                elmB.value = val;
+                let changeEvent = new Event("change", { bubbles: true, cancelable: true, composed: true });
+                elmB.setAttribute("value", props.value);
+                elmB.innerText = props.value;
+                elmB.dispatchEvent(changeEvent);
             } else {
                 elmB.innerText = val;
             }
