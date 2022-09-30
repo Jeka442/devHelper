@@ -14,6 +14,10 @@ function onSelect(e) {
     let firstInput = e.target.nextElementSibling;
     let secondInput = firstInput.nextElementSibling;
     secondInput.value = "";
+    setInputs(selectValue, firstInput, secondInput);
+}
+
+const setInputs = (selectValue, firstInput, secondInput) => {
     firstInput.placeholder = "";
     secondInput.placeholder = "";
     switch (selectValue) {
@@ -48,6 +52,7 @@ function deleteRow(e) {
     });
 }
 
+
 function addAutomation(index, action) {
     let div = document.createElement("div");
     div.classList.add("operation-content");
@@ -65,7 +70,7 @@ function addAutomation(index, action) {
     inp1.placeholder = ".selector";
     inp1.classList.add("inp");
     let inp2 = document.createElement("input");
-    inp2.disabled = true;
+    setInputs(action ? action.action : "click", inp1, inp2);
     inp2.classList.add("inp");
     let delBtn = document.createElement("button");
     delBtn.setAttribute("for-index", index);
@@ -87,8 +92,11 @@ function addAutomation(index, action) {
     }
     container.appendChild(div);
 }
+
 var x = 0;
 addBtn.addEventListener("click", () => {
+    const value = automationSelect.value;
+    if (!value || value == "") return Logger("Add automation name first");
     addAutomation(x++);
 });
 
@@ -304,6 +312,7 @@ automationSelect.addEventListener("change", async (e) => {
 })
 
 const setTrackByName = async (name) => {
+    if (!name || name == "") return;
     container.innerHTML = "";
     chrome.storage.local.get([name], (data) => {
         if (data && data[name] && data[name].length > 0) {

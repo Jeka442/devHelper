@@ -4,7 +4,6 @@ const counter = document.getElementById("count");
 const refreshBtn = document.getElementById("refresh");
 const getDate = (val) => {
     if (!val) return "";
-    console.log(val.toFixed(0));
     const date = new Date(val * 1000);
     return date.toISOString();
 }
@@ -92,13 +91,13 @@ const initFunc = async () => {
                     Logger("cookie has bean deleted")
                     elm.remove();
                 }).catch((e) => {
-                    console.log("something went wrong on deleting cookie", e)
+                    Logger("something went wrong on deleting cookie", e)
                 });
             })
         }
 
     } catch (e) {
-        console.log("failed on loading cookies", e);
+        Logger("failed on loading cookies", e);
     }
 }
 

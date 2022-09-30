@@ -62,11 +62,6 @@ var Logger = (val) => {
 
 async function onPageLoad() {
     const page = window.location.pathname.split("/")[2];
-    console.log(page);
     await chrome.storage.local.set({ lastPage: page })
-
-    chrome.storage.local.get("lastPage", (val) => {
-        console.log(val);
-    })
 }
 onPageLoad();

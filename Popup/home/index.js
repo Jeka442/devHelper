@@ -30,7 +30,6 @@ addToSession.addEventListener("click", async () => {
       target: { tabId: tab.id },
       args: [{ key: AddStuffInpKey.value, val: AddStuffInpValue.value }],
       func: ({ key, val }) => {
-        console.log(key, val);
         window.sessionStorage.setItem(key, val);
       },
     })
@@ -99,7 +98,6 @@ delLocalStorage.addEventListener("click", async () => {
 
 
 delCookies.addEventListener("click", async () => {
-  console.log("devHelper - clears cookies");
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   let url = new URL(tab.url);
   try {
@@ -115,7 +113,6 @@ delCookies.addEventListener("click", async () => {
     });
     Logger("cleared cookies")
   } catch (e) {
-    console.log("something went wrong on deleting cookies", e);
     Logger("something went wrong on deleting cookies");
   }
 });
