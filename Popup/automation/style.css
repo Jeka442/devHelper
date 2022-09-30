@@ -1,14 +1,9 @@
-
 #automation-head{
   display: flex;
   justify-content: center;
   position: relative;
 }
 
-#automation-head> button{
-  position:absolute;
-  right:0;
-}
 
 
 #container{
@@ -52,4 +47,45 @@
 .inp:disabled{
   background-color: transparent;
   border: transparent;
+}
+
+
+#add-automation-container{
+  margin-block: 25px;
+
+}
+#select-automation-container{
+  position: relative;
+}
+#select-automation-container > label{
+  position: absolute;
+  top:-16px;
+  padding-left:4px;
+  font-weight: 600;
+}
+
+#select-automation-del{
+  width:70px;
+  min-width: 10px;
+  opacity: 0.7;
+}
+#select-automation-del:hover{
+  opacity: 1;
+  background-color: #dd3641;
+}
+
+#select-automation{
+  width:100px;
+  border-radius: 6px;
+  padding-block: 5px;
+  border: thin solid #61bbce;
+  padding-inline: 2px;
+  margin:0;
+  box-sizing: border-box;
+}
+
+.flexRow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

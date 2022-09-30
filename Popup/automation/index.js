@@ -1,7 +1,13 @@
 const addBtn = document.getElementById("addBtn");
 const container = document.getElementById("container");
 const startBtn = document.getElementById("activateBtn");
-const saveBtn = document.getElementById("saveBtn");
+const addAutomationTrackBtn = document.getElementById("Add-automation-track");
+const deleteAutomationTrackBtn = document.getElementById(
+    "select-automation-del"
+);
+const automationSelect = document.getElementById("select-automation");
+const delAutomationTrack = document.getElementById("select-automation-del");
+const newAutomationName = document.getElementById("new-automation-name");
 
 function onSelect(e) {
     let selectValue = e.target.value;
@@ -12,21 +18,21 @@ function onSelect(e) {
     secondInput.placeholder = "";
     switch (selectValue) {
         case "click":
-            firstInput.placeholder = ".selector"
+            firstInput.placeholder = ".selector";
             secondInput.disabled = true;
             break;
         case "setValue":
-            firstInput.placeholder = ".selector"
+            firstInput.placeholder = ".selector";
             secondInput.disabled = false;
-            secondInput.placeholder = "value"
+            secondInput.placeholder = "value";
             break;
         case "wait":
-            firstInput.placeholder = "time in ms"
+            firstInput.placeholder = "time in ms";
             secondInput.disabled = true;
             break;
         case "setValFrom":
-            firstInput.placeholder = "from .selector"
-            secondInput.placeholder = "to .selector"
+            firstInput.placeholder = "from .selector";
+            secondInput.placeholder = "to .selector";
             secondInput.disabled = false;
             break;
     }
@@ -36,8 +42,10 @@ function deleteRow(e) {
     const index = e.target.getAttribute("for-index");
     const items = document.getElementsByClassName("operation-content");
     [...items].map((item) => {
-        if (item.getAttribute("for-index") == index) { item.remove(); }
-    })
+        if (item.getAttribute("for-index") == index) {
+            item.remove();
+        }
+    });
 }
 
 function addAutomation(index, action) {
@@ -54,7 +62,7 @@ function addAutomation(index, action) {
         <option value="setValFrom">value from</option>
         `;
     let inp1 = document.createElement("input");
-    inp1.placeholder = ".selector"
+    inp1.placeholder = ".selector";
     inp1.classList.add("inp");
     let inp2 = document.createElement("input");
     inp2.disabled = true;
@@ -78,28 +86,26 @@ function addAutomation(index, action) {
         inp2.value = action.inp2;
     }
     container.appendChild(div);
-
 }
 var x = 0;
 addBtn.addEventListener("click", () => {
     addAutomation(x++);
-})
-
-
+});
 
 const getActionObject = () => {
     const actions = document.getElementsByClassName("operation-content");
-    if (!actions.length) return Logger("No actions to fire"); // test this
+    if (!actions.length) return;
     const track = [...actions].map((item) => {
-        let select = item.getElementsByTagName("select")[0].value
+        let select = item.getElementsByTagName("select")[0].value;
         const [inp1, inp2] = item.getElementsByTagName("input");
         return { action: select, inp1: inp1.value, inp2: inp2.value };
-    })
+    });
     return track;
-}
+};
 
 const startActions = async (track) => {
-    Logger("Automation start")
+    if (!track || !track.length) return Logger("Track is empty");
+    Logger("Automation start");
     for (let member of track) {
         const { action, inp1, inp2 } = member;
         switch (action) {
@@ -117,14 +123,12 @@ const startActions = async (track) => {
                 break;
         }
     }
-    Logger("Automation finish")
-}
-
+    Logger("Automation finish");
+};
 
 startBtn.addEventListener("click", () => {
     startActions(getActionObject());
-})
-
+});
 
 const clickAction = async (selector) => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -135,10 +139,9 @@ const clickAction = async (selector) => {
             const elm = document.querySelector(selector);
             if (!elm) return null; // write error to log
             elm.click(); // write to log
-        }
-    })
-}
-
+        },
+    });
+};
 
 const setValAction = async (selector, value) => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -149,24 +152,23 @@ const setValAction = async (selector, value) => {
             const elm = document.querySelector(props.selector);
             if (!elm) return null; // write error to log
             let tagName = elm.tagName.toLowerCase();
-            if (tagName == 'input' || tagName == 'textarea' || tagName == 'select') {
+            if (tagName == "input" || tagName == "textarea" || tagName == "select") {
                 elm.value = props.value;
                 elm.innerText = props.value;
             } else {
                 elm.innerText = props.value;
             }
-        }
-    })
-}
-
+        },
+    });
+};
 
 const waitAction = (time) => {
     return new Promise((res, rej) => {
         setTimeout(() => {
             res(true);
         }, time);
-    })
-}
+    });
+};
 
 const setValFromAction = async (selectorA, selectorB) => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -183,43 +185,149 @@ const setValFromAction = async (selectorA, selectorB) => {
             let val;
             let tagNameA = elmA.tagName.toLowerCase();
             let tagNameB = elmB.tagName.toLowerCase();
-            if (tagNameA == 'input' || tagNameA == 'textarea' || tagNameA == 'select') {
+            if (
+                tagNameA == "input" ||
+                tagNameA == "textarea" ||
+                tagNameA == "select"
+            ) {
                 val = elmA.value;
             } else {
                 val = elmA.innerText;
             }
-            if (tagNameB == 'input' || tagNameB == 'textarea' || tagNameB == 'select') {
+            if (
+                tagNameB == "input" ||
+                tagNameB == "textarea" ||
+                tagNameB == "select"
+            ) {
                 elmB.value = val;
             } else {
                 elmB.innerText = val;
             }
-        }
-    })
-}
+        },
+    });
+};
 
-
-saveBtn.addEventListener("click", async () => {
+const saveTrack = (name) => {
     const actions = getActionObject();
-    if (!actions || actions.length == 0) {
-        chrome.storage.local.remove("automation", () => {
-            Logger("Automation cleared")
-        });
-    } else {
-        chrome.storage.local.set({ automation: actions }, () => {
-            Logger("Automation saved")
-        })
+    chrome.storage.local.set({ [name]: actions ? actions : [] });
+    chrome.storage.local.set({ lastTrackSelected: automationSelect.value });
+};
+
+window.onblur = () => { saveTrack(automationSelect.value) };
+window.onbeforeunload = () => { saveTrack(automationSelect.value) };
+
+addAutomationTrackBtn.addEventListener("click", async () => {
+    addNewAutomation();
+});
+
+newAutomationName.addEventListener("keydown", (e) => {
+    if (e.key.toLowerCase() == 'enter') {
+        addNewAutomation();
     }
 })
 
-function initFromStorage() {
-    chrome.storage.local.get(["automation"], (data) => {
-        if (data && data.automation && data.automation.length > 0) {
+const addNewAutomation = async () => {
+    const trackName = newAutomationName.value;
+    newAutomationName.value = "";
+    if (!trackName || trackName == "" || !/^[a-zA-Z]+$/.test(trackName)) {
+        Logger("Invalid name");
+        return;
+    }
+    let trackList = [];
+    const oldList = await chrome.storage.local.get(["automationNames"]);
+    if (oldList && oldList.automationNames) {
+        if (oldList.automationNames.length > 6) {
+            Logger("You reached the limit of saved items");
+            return;
+        }
+        trackList = trackList.concat(oldList.automationNames);
+    }
+    if (trackList.filter((val) => val == trackName).length > 0) {
+        Logger("This name already exists!");
+        return;
+    } else {
+        trackList.push(trackName);
+    }
+
+    await chrome.storage.local.set({ automationNames: trackList });
+    let op = document.createElement("option");
+    op.value = trackName;
+    op.innerText = trackName;
+    automationSelect.appendChild(op);
+    Logger("Automation track added");
+}
+
+async function initFromStorage() {
+    container.innerHTML = "";
+    automationSelect.innerHTML = "";
+    chrome.storage.local.get(["automationNames"]).then((data) => {
+        if (data && data.automationNames && data.automationNames.length > 0) {
+            const list = data.automationNames;
+            for (let name of list) {
+                let op = document.createElement("option");
+                op.value = name;
+                op.innerText = name;
+                automationSelect.appendChild(op);
+            }
+        }
+    });
+
+}
+
+delAutomationTrack.addEventListener("click", async () => {
+    const valueToDelete = automationSelect.value;
+    if (!valueToDelete || valueToDelete == "") {
+        Logger("No value selected");
+        return;
+    }
+    chrome.storage.local.get(["automationNames"]).then(async ({ automationNames }) => {
+        if (automationNames && automationNames.length > 0) {
+            const list = automationNames.filter(val => val != valueToDelete);
+            await chrome.storage.local.set({ automationNames: list });
+            await chrome.storage.local.remove(valueToDelete);
+            container.innerHTML = "";
+            automationSelect.value = "";
+            setTrackByName(list[0]);
+            initFromStorage();
+        }
+    })
+
+});
+
+
+automationSelect.addEventListener("focus", async (e) => {
+    saveTrack(automationSelect.value);
+})
+
+automationSelect.addEventListener("change", async (e) => {
+    setTrackByName(e.target.value);
+})
+
+const setTrackByName = async (name) => {
+    container.innerHTML = "";
+    chrome.storage.local.get([name], (data) => {
+        if (data && data[name] && data[name].length > 0) {
             let index = 0;
-            for (let action of data.automation) {
+            for (let action of data[name]) {
                 addAutomation(index, action);
                 index++;
             }
         }
     });
 }
+
 initFromStorage();
+
+
+const openLastTrack = () => {
+    chrome.storage.local.get("lastTrackSelected").then(({ lastTrackSelected }) => {
+        if (lastTrackSelected) {
+            automationSelect.value = lastTrackSelected;
+            setTrackByName(lastTrackSelected);
+        }
+    })
+}
+
+
+
+openLastTrack();
