@@ -23,6 +23,7 @@ const menuHtml = `
     <a href="../aboutMe/index.html"><img src="../../img/aboutMe.png" alt="" /> </a>
 </div>
 `;
+const infoDiv = document.getElementById("Info-div");
 const header = document.getElementsByTagName("header")[0];
 const menu = document.getElementsByTagName("menu")[0];
 header.innerHTML = headerHtml;
@@ -60,8 +61,25 @@ var Logger = (val) => {
     }, 1000);
 }
 
+
 async function onPageLoad() {
     const page = window.location.pathname.split("/")[2];
     await chrome.storage.local.set({ lastPage: page })
+    if (infoDiv) {
+        const mainContainer = document.getElementsByTagName("main")[0];
+        const infoImg = document.createElement("img");
+        infoImg.src = "../../img/info.png";
+        infoImg.id = "infoImg";
+        infoImg.addEventListener("click", () => {
+            if (infoDiv.getAttribute("data-open")) {
+                infoDiv.style.display = "none";
+                infoDiv.removeAttribute("data-open");
+                return;
+            }
+            infoDiv.style.display = "flex";
+            infoDiv.setAttribute("data-open", "true");
+        })
+        mainContainer.appendChild(infoImg);
+    }
 }
 onPageLoad();

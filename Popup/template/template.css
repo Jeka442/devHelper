@@ -161,9 +161,34 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #478996; 
   }
-
-
-
+  #infoImg{
+    position: absolute;
+    top:10px;
+    left:15px;
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  #infoImg:hover{
+    opacity:1;
+  }
+  #Info-div{
+    position:absolute;
+    right:0;
+    top:35px;
+    padding:5px;
+    width:90%;
+    background-color:rgba(0, 0, 0, 1);
+    display: none;
+    font-size: 16px;
+    flex-direction:column;
+    color:white;
+    gap: 25px;
+    z-index: 5000;
+  }
+  #Info-div *{
+    color:white;
+  }
+  
   #notification{
     position:fixed;
     bottom:0;

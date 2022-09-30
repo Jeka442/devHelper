@@ -12,24 +12,79 @@
     <script src="../template/template.js" defer></script>
     <header></header>
     <menu></menu>
-
     <main>
+      <div id="Info-div">
+        <h2>Create automation track</h2>
+        <section>
+          <span>Adds new automation instance</span>
+          <div class="flexRow">
+            <input type="text" placeholder="Automation name" />
+            <button>Add</button>
+          </div>
+        </section>
+        <section>
+          <span
+            >Select one of your saved tracks or delete the selected one</span
+          >
+          <div class="flexRow">
+            <select
+              value="automation"
+              name="select-automation-temp"
+              style="color: black"
+            >
+              <option value="automation">automation</option>
+            </select>
+            <button>Delete</button>
+          </div>
+        </section>
+        <h2>Customize automation track</h2>
+        <div>
+          <select style="color: black" value="setValue">
+            <option value="setValue">set value</option>
+          </select>
+          <span>Choose action from drop list</span>
+        </div>
+        <div class="flexRow" style="text-align: left">
+          <input type="text" placeholder=".selector" style="width: 80px" />
+          <br />
+          <span style="white-space: pre-line"
+            >Specify valid css selector (input[name=fName] / #email) of the
+            element you wish to perform action on
+          </span>
+        </div>
+        <div>
+          <input type="text" placeholder="value" style="width: 80px" />
+          <span>Place the value you wish to set to the selected element</span>
+        </div>
+        <section>
+          <button>Add</button>
+          <span>Adds new action to selected automation track</span>
+        </section>
+        <section>
+          <button style="background-color: red">Start</button>
+          <span>Runs the automation</span>
+        </section>
+      </div>
       <div id="automation-head">
         <h2>Automation</h2>
       </div>
 
-        <div id="add-automation-container">
-          <input type="text" id="new-automation-name" placeholder="Automation name" />
-          <button id="Add-automation-track">Add</button>
-        </div>
+      <div id="add-automation-container">
+        <input
+          type="text"
+          id="new-automation-name"
+          placeholder="Automation name"
+        />
+        <button id="Add-automation-track">Add</button>
+      </div>
 
-        <div class="flexRow">
-          <div id="select-automation-container">
-            <label for="select-automation">Automation</label>
-            <select id="select-automation" name="select-automation"></select>
-          </div>
-          <button id="select-automation-del">Delete</button>
+      <div class="flexRow">
+        <div id="select-automation-container">
+          <label for="select-automation">Automation</label>
+          <select id="select-automation" name="select-automation"></select>
         </div>
+        <button id="select-automation-del">Delete</button>
+      </div>
 
       <div id="container"></div>
       <div id="operations">
