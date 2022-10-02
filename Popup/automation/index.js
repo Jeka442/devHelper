@@ -245,7 +245,7 @@ const addNewAutomation = async () => {
     const trackName = newAutomationName.value;
     newAutomationName.value = "";
     if (!trackName || trackName == "" || !/^[a-zA-Z]+$/.test(trackName)) {
-        Logger("Invalid name");
+        Logger("Name accepts a-z or A-Z characters only");
         return;
     }
     let trackList = [];
