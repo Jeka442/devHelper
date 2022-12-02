@@ -164,7 +164,7 @@ const setValAction = async (selector, value) => {
             let tagName = elm.tagName.toLowerCase();
             if (tagName == "input" || tagName == "textarea" || tagName == "select") {
                 let changeEvent = new Event("change", { bubbles: true, cancelable: true, composed: true });
-                elm.setAttribute("value", props.value);
+                elm.value = props.value;
                 elm.innerText = props.value;
                 elm.dispatchEvent(changeEvent);
             } else {
