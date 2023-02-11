@@ -17,12 +17,20 @@
     padding-inline:2px;
   }
 
-  textarea{
+  .cookie-textarea{
     border-radius:6px;
     padding-block:5px;
     border:thin solid#61bbce;
     padding-inline:2px;
     resize: none;
+  }
+  .inp-textarea{
+    min-height: 25px;
+    height: 25px;
+    border-radius: 6px;
+    border:thin solid#61bbce;
+    overflow: hidden;
+    resize: vertical;
   }
 
   input:focus{

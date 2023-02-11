@@ -30,18 +30,13 @@ async function getStorage() {
         container.appendChild(headers);
         for (let [key, val] of content) {
             let elm = document.createElement("div");
-            let isLongString = val.length > 8000;
-            let inputStyle = isLongString ? `style="border:1px solid red; color:red"` : "";
-            let inputValue = isLongString ? '*OVER 8k CHARS*' : val;
             elm.classList.add("item");
             elm.classList.add("flexRow");
             elm.innerHTML = `
-            <div>
-              <input class="keyInp" value="${key}" type="text" for-index="${index}"/>
-              <input ${inputStyle} class="valInp" value="${inputValue}" type="text" for-index="${index}"/>
-            </div>
-            <div class="delBtn" for-index="${index}">delete</div>
-        `;
+              <input class="keyInp" value="${key}" type="text" for-index="${index}" />
+              <textarea class="valInp inp-textarea" for-index="${index}">${val}</textarea>
+              <div class="delBtn" for-index="${index}">delete</div>
+           `;
             container.appendChild(elm);
             index++;
         }

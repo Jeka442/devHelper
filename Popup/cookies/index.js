@@ -32,7 +32,7 @@ const initFunc = async () => {
             </div>
             <div class="cookie-content" for-data="${index}" state="closed">
                 <p>value</p>
-                <textarea disabled class="cookie-value">${cookie.value}</textarea>
+                <textarea disabled class="cookie-value cookie-textarea">${cookie.value}</textarea>
                 <p>domain</p>
                 <input disabled class="cookie-domain" value="${cookie.domain}"></input>
                 <p>path</p>
